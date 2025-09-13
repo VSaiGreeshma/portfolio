@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Personal E‑Portfolio — V.Sai Greeshma</title>
+  <meta name="description" content="E-Portfolio showcasing Personal Info, Education, Skills, Work, Projects, Achievements, Samples and Contact." />
+
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#06b6d4; /* teal */
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --maxw:1100px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#071023 0%, #081426 50%, #071322 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:32px 20px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .container{width:100%;max-width:var(--maxw)}
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .avatar{width:72px;height:72px;
+        background-image: url('/myphoto.jpg');
+        background-size: cover;
+        border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;color:#021018;box-shadow:0 6px 24px rgba(3,7,18,0.7)}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:var(--muted)}
+
+    nav{display:flex;gap:10px;flex-wrap:wrap}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-size:14px}
+    nav a:hover{background:var(--glass);color:#e6eef6}
+
+    main{display:grid;grid-template-columns:360px 1fr;gap:22px}
+
+    /* left column */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:18px}
+    .profile{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+    .name{font-size:18px;font-weight:600}
+    .role{color:var(--muted);font-size:14px}
+    .contact-list{width:100%;margin-top:6px}
+    .contact-list a{display:flex;gap:8px;align-items:center;padding:8px;border-radius:8px;text-decoration:none;color:var(--muted)}
+    .contact-list a:hover{background:var(--glass);color:#e6eef6}
+
+    .section-title{font-weight:600;margin:8px 0 10px}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* skill bars */
+    .skill{margin-bottom:10px}
+    .skill .bar{height:12px;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden}
+    .skill .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#7c3aed);border-radius:999px}
+
+    /* right column */
+    .content-section{background:transparent;padding:18px;border-radius:12px}
+    .card-lg{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:22px;margin-bottom:18px}
+
+    .education .item, .experience .item, .project .item{padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);margin-bottom:12px}
+    .item h3{margin:0;font-size:16px}
+    .meta{font-size:13px;color:var(--muted)}
+
+    /* gallery */
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+    .thumb{height:120px;border-radius:10px;background:linear-gradient(135deg,#0a1a2a,#071422);display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .thumb span{font-size:13px;color:var(--muted)}
+
+    /* footer */
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:980px){
+      main{grid-template-columns:1fr;}
+      header{flex-direction:column;align-items:flex-start}
+      .avatar{width:60px;height:60px}
+    }
+
+    /* buttons */
+    .btn{display:inline-block;padding:8px 12px;border-radius:10px;text-decoration:none;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#7c3aed);color:#021018;border:none}
+
+    /* utilities */
+    .flex{display:flex;gap:12px}
+    .space-between{justify-content:space-between}
+
+    /* modal */
+    .modal{position:fixed;left:0;top:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,11,0.6);visibility:hidden;opacity:0;transition:all .18s}
+    .modal.open{visibility:visible;opacity:1}
+    .modal .modal-card{max-width:900px;width:95%;background:#061424;padding:18px;border-radius:10px}
+    .avatar1{
+        width: 120px;
+        height: 120px;
+        background-image: url('/myphoto.jpg');
+        background-size: cover;
+        border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;color:#021018;box-shadow:0 6px 24px rgba(3,7,18,0.7)}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="avatar"></div>
+        <div>
+          <h1>V.Sai Greeshma</h1>
+          <p class="lead">Web Developer • Designer • Student</p>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#samples">Samples</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- LEFT COLUMN -->
+      <aside>
+        <div class="card">
+          <div class="profile">
+            <div style="width:120px;height:120px;border-radius:14px;overflow:hidden;box-shadow:0 8px 30px rgba(2,6,11,0.7)">
+              <!-- replace with <img src="your-photo.jpg"> -->
+               <div class="avatar1"></div>
+              <!-- <svg width="120" height="120" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="12" fill="#08314a"/><text x="50" y="55" fill="#8be3ea" font-size="36" text-anchor="middle" font-family="Inter, sans-serif">YN</text></svg> -->
+            </div>
+            <div class="name">V.Sai Greeshma</div>
+            <div class="role">Third-year Computer Science Student</div>
+            <div class="small">Location: Sri City, india</div>
+
+            <div class="contact-list" style="width:100%">
+              <a href="mailto:you@example.com">✉️ saigreeshma.v23@iiits.in</a>
+              <a href="https://github.com/yourusername" target="_blank">🐙 GitHub /VSaiGreeshma</a>
+              <a href="https://linkedin.com/in/yourusername" target="_blank">🔗 LinkedIn /vsaigreeshma</a>
+            </div>
+          </div>
+
+          <hr style="border:none;height:1px;background:rgba(255,255,255,0.03);margin:14px 0">
+
+          <div>
+            <div class="section-title">Education</div>
+            <div class="small">B.Tech in Computer Science — IIIT Sri City (2023 — 2027)</div>
+          </div>
+
+          <div style="margin-top:14px">
+            <div class="section-title">Skills</div>
+            <div class="skill">
+              <div class="small">HTML, CSS, JavaScript</div>
+              <div class="bar"><i style="width:92%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="small">React / Node.js/mondodb</div>
+              <div class="bar"><i style="width:84%"></i></div>
+            </div>
+            <div class="skill">
+              <div class="small">Java / python/ Algorithms</div>
+              <div class="bar"><i style="width:78%"></i></div>
+            </div>
+          </div>
+
+          <div style="margin-top:14px">
+            <div class="section-title">Extracurricular</div>
+            <div class="small">Volunteer @ Local Coding Club • Organizer of Hackathon 2024</div>
+          </div>
+
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="card">
+          <div class="section-title">Achievements & Awards</div>
+          <ul class="small" style="margin:0;padding-left:18px">
+            <li>1st Prize — Intercollege Coding Contest (2024)</li>
+            <li>Best Project Award — XYZ Hackathon (2023)</li>
+          </ul>
+        </div>
+
+      </aside>
+
+      <!-- RIGHT COLUMN -->
+      <section>
+        <section id="about" class="card-lg">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap">
+            <div style="flex:1">
+              <h2 style="margin:0 0 6px">About / Personal Statement</h2>
+              <p class="small">I am a passionate developer focusing on building accessible and performant web applications. I love solving algorithmic problems and turning ideas into working products. My goal is to create user-centered interfaces and learn continuously.</p>
+            </div>
+            <div style="min-width:220px">
+              <a class="btn btn-primary" href="#contact">Contact Me</a>
+              <a class="btn" href="#resume" style="margin-left:8px">Download Resume</a>
+            </div>
+          </div>
+
+          <div style="margin-top:14px">
+            <div class="section-title">Reflections</div>
+            <p class="small">During my studies I worked on multiple projects that taught me project planning, version control, testing and collaboration. I enjoy reflecting on user feedback and iterating rapidly.</p>
+          </div>
+        </section>
+
+        <section id="projects" class="card-lg experience">
+          <h2 style="margin-top:0"> Projects</h2>
+
+          <div class="item project">
+            <h3>Carenest— Group Project (Course)</h3>
+            <div class="meta">Jan 2025 — Apr 2026</div>
+            <p class="small">CareNest is a web-based platform designed to connect patients with qualified therapists and provide a structured space for therapy management.</p>
+            <div style="margin-top:8px" class="flex">
+              <a class="btn" href="#" onclick="openWork('CareNest')">View Details</a>
+              <a class="btn" href="https://github.com/Vedant00Maske/CareNest-Therapy "target="_blank">Repository</a>
+            </div>
+          </div>
+
+        </section>
+
+        <section id="samples" class="card-lg">
+          <h2 style="margin-top:0">Samples of Work</h2>
+          <div class="gallery" id="gallery">
+            <div class="thumb" data-title="UI Kit" onclick="openSample('UI Kit — small component library')"><span>UI Kit</span></div>
+            <div class="thumb" data-title="Data Viz" onclick="openSample('Data Viz — COVID Dashboard')"><span>Data Viz</span></div>
+            <div class="thumb" data-title="Mobile App" onclick="openSample('Mobile App — Expense Tracker')"><span>Mobile App</span></div>
+            <div class="thumb" data-title="ML Project" onclick="openSample('ML — Sentiment Classifier')"><span>ML Project</span></div>
+          </div>
+        </section>
+
+        <section id="resume" class="card-lg">
+          <h2 style="margin-top:0">Resume & References</h2>
+          <p class="small">Download a PDF resume or view references on request.</p>
+          <div class="flex">
+            <a class="btn btn-primary" href="/resume.pdf" download>Download Resume</a>
+            <a class="btn" href="#contact">Request References</a>
+          </div>
+        </section>
+
+        <section id="contact" class="card-lg">
+          <h2 style="margin-top:0">Contact & Links</h2>
+          <p class="small">Prefer email: <strong>you@example.com</strong></p>
+
+          <form id="contactForm" onsubmit="submitForm(event)" style="margin-top:12px;display:grid;gap:10px;max-width:560px">
+            <input name="name" placeholder="Your name" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit">
+            <input name="email" type="email" placeholder="you@example.com" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit">
+            <textarea name="message" rows="4" placeholder="Message" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></textarea>
+            <div>
+              <button class="btn btn-primary" type="submit">Send Message</button>
+              <span id="formMsg" class="small" style="margin-left:12px;color:var(--muted)"></span>
+            </div>
+          </form>
+
+          <div style="margin-top:14px">
+            <div class="small">More links:</div>
+            <div class="flex" style="margin-top:8px">
+              <a class="btn" href="https://github.com/VSaiGreeshma" target="_blank">GitHub</a>
+              <a class="btn" href="https://linkedin.com/in/vsaigreeshma" target="_blank">LinkedIn</a>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          © V.Sai Greeshma — Built with HTML, CSS & JavaScript
+        </footer>
+      </section>
+    </main>
+
+    <!-- Modal for samples / project details -->
+    <div id="modal" class="modal" role="dialog" aria-hidden="true">
+      <div class="modal-card">
+        <div style="display:flex;justify-content:space-between;align-items:center"><h3 id="modalTitle" style="margin:0">Title</h3><button onclick="closeModal()" class="btn">Close</button></div>
+        <p id="modalBody" class="small" style="margin-top:12px">Details...</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Smooth scroll for nav anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href=a.getAttribute('href');
+        if(href.startsWith('#')){
+          e.preventDefault();
+          const el=document.querySelector(href);
+          if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+
+    // Open sample modal
+    function openSample(text){
+      document.getElementById('modalTitle').textContent = text.split('—')[0].trim();
+      document.getElementById('modalBody').textContent = text + '\n\nShort description: This sample demonstrates design, implementation details, and links.';
+      document.getElementById('modal').classList.add('open');
+      document.getElementById('modal').setAttribute('aria-hidden','false');
+    }
+    function openWork(id){
+      // sample: show modal for more project details
+      openSample('Service Sphere — Service discovery platform using React & Express. Role: Backend & Auth. Link: https://github.com/yourusername/servicesphere');
+    }
+    function closeModal(){
+      document.getElementById('modal').classList.remove('open');
+      document.getElementById('modal').setAttribute('aria-hidden','true');
+    }
+
+    // Contact form (example only: uses mailto fallback)
+    function submitForm(e){
+      e.preventDefault();
+      const f = e.target;
+      const name = f.name.value.trim();
+      const email = f.email.value.trim();
+      const message = f.message.value.trim();
+      const msg = encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+message);
+      // Try to open default mail client as simple fallback
+      const subject = encodeURIComponent('Contact from E-Portfolio');
+      window.location.href = 'mailto:you@example.com?subject='+subject+'&body='+msg;
+      document.getElementById('formMsg').textContent = 'Opening email client...';
+    }
+
+    // small accessibility: close modal on ESC
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+  </script>
+</body>
+</html>
